@@ -1,4 +1,4 @@
-package dev.java.Cadastro;
+package dev.java.Cadastro.Usuarios;
 
 import org.springframework.web.bind.annotation.*;
 

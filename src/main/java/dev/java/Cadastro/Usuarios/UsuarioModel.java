@@ -1,8 +1,11 @@
-package dev.java.Cadastro;
+package dev.java.Cadastro.Usuarios;
 
+import dev.java.Cadastro.Missoes.EnderecoModel;
 import jakarta.persistence.*;
 
-//Entity tranforma uma classe em uma entidade do BD.
+import java.util.List;
+
+//Entity transforma uma classe em uma entidade do BD.
 @Entity
 @Table(name = "tb_cadastro")
 public class UsuarioModel {
@@ -10,16 +13,30 @@ public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
+    private String sobrenome;
+
     private String email;
+
     private int idade;
+
+    //private List<EnderecoModel> missoes;
+
+
+    // Uma usuário possui apenas umas cidade.
+    @ManyToOne
+    @JoinColumn(name = "cidades_id") // Foreign Key
+    private EnderecoModel cidades;
 
     public UsuarioModel() {
     }
 
 
-    public UsuarioModel(String nome, String email, int idade) {
+    public UsuarioModel(String nome, String sobrenome, String email, int idade) {
         this.nome = nome;
+        this.sobrenome = sobrenome;
         this.email = email;
         this.idade = idade;
     }
@@ -30,6 +47,14 @@ public class UsuarioModel {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getEmail() {
